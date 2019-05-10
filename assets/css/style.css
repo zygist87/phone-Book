@@ -1,0 +1,18 @@
+* {
+  background: lime;
+}
+.title {
+  color: red;
+  text-align: center;
+}
+.button {
+  border: 1px solid red;
+}
+span {
+  display: -webkit-inline-box;
+  width: 150px;
+  margin-top: 10px;
+}
+button {
+  margin-right: 10px;
+}
