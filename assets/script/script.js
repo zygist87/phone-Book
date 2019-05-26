@@ -27,10 +27,11 @@ function printObj() {
 
 
 
+
       // bandau padaryti, kad mestų klaidą jei per ilgas nr įvestas
-      if (phoneNumber.value.length > 12 || phoneNumber.value == "" || fullName.value == "") {
-        alert("Phone Number is to long");
-      };
+      // if (phoneNumber.value.length > 12 || phoneNumber.value == "" || fullName.value == "") {
+      //   console.log("Phone Number is to long");
+      // };
 
 
 
@@ -50,6 +51,7 @@ function printObj() {
     // event listener for delete button
     deleteBtn.addEventListener("click", event => {
       console.log("paspaudziau delete", trata);
+      
       //listObj.splice(0, 4, 2);
       listObj.splice(trata, 1);
       printObj();
@@ -91,8 +93,37 @@ function printObj() {
     let forFav = document.createElement("span");
     let forFavorite = document.createElement("img");
     forFavorite.id = "favoriteImg";
-    forFavorite.src = "assets/images/ic_heartWhite_24px.svg"
+    forFavorite.className = "favoriteImg";
+    forFavorite.src =listObj[trata].favorite? "assets/images/ic_unlike_24px.svg" : "file:///D:/phoneBook/assets/images/ic_like_24px.svg"
     forFav.appendChild(forFavorite);
+
+    if (listObj[trata].favorite) {
+      forFavorite.classList.add("favoriteImgNot");
+    }
+
+    //event listener for favoriteImg
+    forFavorite.addEventListener("click", event => {
+      listObj[trata].favorite = !listObj[trata].favorite;
+
+      console.log("paspaudziau Favorite", trata);
+      // if (forFavorite.src == "file:///D:/phoneBook/assets/images/ic_like_24px.svg") {
+      //   forFavorite.src = "file:///D:/phoneBook/assets/images/ic_unlike_24px.svg";
+      // } else {
+      //   console.log(forFavorite.src);
+      //   forFavorite.src = "file:///D:/phoneBook/assets/images/ic_like_24px.svg"
+      // }
+      //
+      // forFavorite.classList.toggle("favoriteImgNot");
+
+      localStorage.setItem('localStoragePhoneBook', JSON.stringify(listObj));
+      printObj();
+    });
+
+
+
+
+
+
 
     // appending everything to pParagraph
     forName.textContent=val.fullName;
@@ -119,13 +150,13 @@ function refreshInput(){
 // kodaspo even => atpažys ar prieš tai paspaustas edit mygtukas ar ne ir jei paspaustas tai duomenis priskiria tam pačiam indeksui, o jei nebuvo paspaustas edit mygtukas tada saugo naują įraša į listo gala
   saveInput.addEventListener("click", event => {
     if (editIndex != -1) {                        // si eilute skirta paspaudus edit mygtuką, kad būtų galima replace padaryti, o ne kurtų naują įrašą
-      listObj[editIndex] = {fullName :fullName.value, phone: phoneNumber.value};
+      listObj[editIndex] = {fullName :fullName.value, phone: phoneNumber.value, favorite: false};
       editIndex = -1;                             // si eilute skirta paspaudus edit mygtuką, kad būtų galima replace padaryti, o ne kurtų naują įrašą
     } else {
       listObj.push({fullName :fullName.value, phone: phoneNumber.value});
     }
 
-  //let nameValue = phoneInput.value;
+
   printObj();
   refreshInput();
 

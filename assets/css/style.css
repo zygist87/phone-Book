@@ -16,3 +16,12 @@ span {
 button {
   margin-right: 10px;
 }
+#favoriteImg {
+  color: red;
+}
+.favoriteImg {
+  background: red;
+}
+.favoriteImgNot {
+  background: green;
+}
